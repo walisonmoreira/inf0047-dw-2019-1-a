@@ -5,13 +5,13 @@ Aplicação web com JSP.
 Para executar o projeto.
 
 ```sh
-mvnw org.apache.tomcat.maven:tomcat7-maven-plugin:run -Dmaven.tomcat.port=9090
+mvnw tomcat7:run
 ```
 
 Para acessar a página.
 
 ```
-http://localhost:9090/exemplo-05
+http://localhost:9090/
 ```
 
 Para criar um novo projeto.

@@ -14,38 +14,20 @@
           <h3 class="panel-title">Menor ou Maior?</h3>
         </div>
         <div class="panel-body">
-        <form>
-          <fieldset>
-            <div class="form-group">
-              <input class="form-control" placeholder="Idade" name="idade" type="text">
-            </div>
-                    <button class="btn btn-sm btn-success">Calcular</button>
-                </fieldset>
-            </form>
+          <form>
+            <fieldset>
+              <div class="form-group">
+                <input class="form-control" placeholder="Idade" name="idade" type="text">
+              </div>
+              <button class="btn btn-sm btn-success">Calcular</button>
+            </fieldset>
+          </form>
         </div>
+      </div>
     </div>
-    <!-- Scriptlet. Codigo Java no HTML. -->
-    <%
-      String idadeStr = request.getParameter("idade");
-      if (idadeStr != null) {
-         int idade = Integer.parseInt(idadeStr);
-    %>
     <br>
-    <%
-        if (idade >= 18) {
-    %>
     <p>
-      Maior de Idade.
+      ${resultado}
     </p>
-    <%
-        } else {
-    %>
-    <p>
-      Menor de Idade.
-    </p>
-    <%
-        }
-      }
-    %>
   </body>
 </html>

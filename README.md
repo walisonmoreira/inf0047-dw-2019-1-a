@@ -9,6 +9,7 @@ Experimentos da disciplina de DW.
 * [`exemplo-03`](exemplo-03/README.md)
 * [`exemplo-04`](exemplo-04/README.md)
 * [`exemplo-05`](exemplo-05/README.md) - Aplicação Web com JSP.
+* [`exemplo-06`](exemplo-06/README.md) - Aplicação web com MVC..
 
 ## Links
 

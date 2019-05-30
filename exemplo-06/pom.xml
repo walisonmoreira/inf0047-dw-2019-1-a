@@ -11,10 +11,31 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
+    <!-- A versão do Java no código fonte será a 1.8. -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <!-- A versão do Java no código binários será a 1.8. -->
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+
     <maven.tomcat.port>9090</maven.tomcat.port>
     <!-- URI do projeto no Tomcat. Precisa começar com "/". Exemplo: "/my-project" ficaria algo como "http://localhost:9090/my-project" -->
     <maven.tomcat.path>/</maven.tomcat.path>
   </properties>
+
+  <dependencies>
+    <!-- Dependência com a biblioteca de Servlet versão 3. -->
+    <dependency>
+      <!-- Identificação do grupo da biblioteca.  -->
+      <groupId>javax.servlet</groupId>
+      <!-- Identificação da biblioteca.  -->
+      <artifactId>javax.servlet-api</artifactId>
+      <!-- Versão da biblioteca.  -->
+      <version>3.1.0</version>
+      <!-- Instrução que faz com que o Maven exclua essa biblioteca do pacote final do projeto. É que os servidores de aplicação já possuem essa biblioteca dentro deles.  -->
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
 
   <build>
