@@ -1,3 +1,5 @@
 .idea
+db
 target
 *.iml
+derby.log
