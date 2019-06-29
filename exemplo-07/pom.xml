@@ -1,0 +1,125 @@
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>dw</groupId>
+  <artifactId>exemplo-07</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <!-- Propriedades usadas pelo Maven e seus plugins. -->
+  <properties>
+    <!-- A versão do Java no código fonte será a 1.8. -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <!-- A versão do Java no código binários será a 1.8. -->
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+    <!-- Porta onde o Tomcat executará em desenvolvimento. O padrão é "8080". -->
+    <!-- Definir algo como "9090" diminui a chance de dar conflito de porta, já que a porta "8080" é bastante popular e já pode estar sendo usada.  -->
+    <maven.tomcat.port>9090</maven.tomcat.port>
+    <!-- URI do projeto no Tomcat. Precisa começar com "/". Exemplo: "/my-project" ficaria algo como "http://localhost:9090/my-project" -->
+    <maven.tomcat.path>/</maven.tomcat.path>
+    <!-- Versão do Apache Derby -->
+    <derby.version>10.14.2.0</derby.version>
+  </properties>
+
+  <dependencies>
+
+    <!-- Dependência com a biblioteca de Servlet versão 3. -->
+    <dependency>
+      <!-- Identificação do grupo da biblioteca.  -->
+      <groupId>javax.servlet</groupId>
+      <!-- Identificação da biblioteca.  -->
+      <artifactId>javax.servlet-api</artifactId>
+      <!-- Versão da biblioteca.  -->
+      <version>3.1.0</version>
+      <!-- Instrução que faz com que o Maven exclua essa biblioteca do pacote final do projeto. É que os servidores de aplicação já possuem essa biblioteca dentro deles.  -->
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Para usar o driver do banco de dados Derby. -->
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derbyclient</artifactId>
+      <version>${derby.version}</version>
+    </dependency>
+    <!-- Para usar JPA com Hibernate. -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>4.3.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>4.3.1.Final</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Plugin para executar e administrar o projeto no Tomcat 7. Site do plugin: http://tomcat.apache.org/maven-plugin-2.2/tomcat7-maven-plugin -->
+      <plugin>
+        <!-- Identificação do grupo do plugin.  -->
+        <groupId>org.apache.tomcat.maven</groupId>
+        <!-- Identificação do plugin.  -->
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <!-- Versão do plugin. -->
+        <version>2.2</version>
+      </plugin>
+      <!-- Para executar o banco de dados Derby pelo Maven. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>derby-start</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <includeProjectDependencies>false</includeProjectDependencies>
+              <includePluginDependencies>true</includePluginDependencies>
+              <mainClass>org.apache.derby.drda.NetworkServerControl</mainClass>
+              <arguments>
+                <argument>start</argument>
+                <argument>-noSecurityManager</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>derby-stop</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <includeProjectDependencies>false</includeProjectDependencies>
+              <includePluginDependencies>true</includePluginDependencies>
+              <mainClass>org.apache.derby.drda.NetworkServerControl</mainClass>
+              <arguments>
+                <argument>shutdown</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${derby.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbynet</artifactId>
+            <version>${derby.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

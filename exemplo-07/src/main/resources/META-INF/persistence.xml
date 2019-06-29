@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
+
+  <persistence-unit name="petshop">
+    <!-- Instruindo ao JPA que será usado Hibernate. -->
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>exemplo07.Produto</class>
+
+    <properties>
+      <!-- Driver JDBC do Derby. -->
+      <property name="hibernate.connection.driver_class"
+                value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="hibernate.connection.url"
+                value="jdbc:derby://localhost:1527/db;create=true"/>
+      <property name="hibernate.connection.username" value="app"/>
+      <property name="hibernate.connection.password" value="app"/>
+      <!-- Dialeto Hibernate para o Derby. -->
+      <property name="hibernate.dialect"
+                value="org.hibernate.dialect.DerbyDialect" />
+      <!-- Ligar em desenvolvimento e desligar em produção. -->
+      <property name="hibernate.hbm2ddl.auto" value="update" />
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.format_sql" value="true" />
+      <!-- C3P0 - Pool de conexões -->
+      <property name="hibernate.connection.provider_class"
+                value="org.hibernate.connection.C3P0ConnectionProvider" />
+      <property name="hibernate.c3p0.min_size" value="10" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+    </properties>
+
+  </persistence-unit>
+
+
+</persistence>
