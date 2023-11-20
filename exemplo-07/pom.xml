@@ -23,7 +23,7 @@
     <!-- URI do projeto no Tomcat. Precisa começar com "/". Exemplo: "/my-project" ficaria algo como "http://localhost:9090/my-project" -->
     <maven.tomcat.path>/</maven.tomcat.path>
     <!-- Versão do Apache Derby -->
-    <derby.version>10.14.2.0</derby.version>
+    <derby.version>10.17.1.0</derby.version>
   </properties>
 
   <dependencies>
